@@ -5,7 +5,7 @@ build-backend = "setuptools.backends._legacy:_Backend"
 [project]
 name = "pipersr"
 version = "1.0.0"
-description = "First super-resolution model designed for Apple Neural Engine. 4x upscale, real-time, on-device."
+description = "First super-resolution model designed for Apple Neural Engine. 2x upscale, real-time, on-device."
 readme = "README.md"
 license = "AGPL-3.0-only"
 requires-python = ">=3.10"

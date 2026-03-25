@@ -18,16 +18,30 @@ import numpy as np
 from PIL import Image
 
 
-MODEL_DIR = Path.home() / ".cache" / "pipersr"
-MODEL_PATH = MODEL_DIR / "pipersr_4x.mlpackage"
+REPO_MODEL = Path(__file__).parent / "PiperSR_2x.mlpackage"
+CACHE_MODEL = Path.home() / ".cache" / "pipersr" / "PiperSR_2x.mlpackage"
 
 # Set5 images — standard SR benchmark
 SET5_NAMES = ["baby", "bird", "butterfly", "head", "woman"]
 
 
+def _find_model():
+    if REPO_MODEL.exists():
+        return REPO_MODEL
+    if CACHE_MODEL.exists():
+        return CACHE_MODEL
+    raise FileNotFoundError(
+        f"Model not found.\n"
+        f"Expected at: {REPO_MODEL}\n"
+        f"Or cached at: {CACHE_MODEL}\n"
+        f"Download from: https://modelpiper.com/models/pipersr"
+    )
+
+
 def load_model():
+    model_path = _find_model()
     model = ct.models.MLModel(
-        str(MODEL_PATH),
+        str(model_path),
         compute_units=ct.ComputeUnit.CPU_AND_NEURAL_ENGINE,
     )
     return model
@@ -110,7 +124,7 @@ def benchmark_fps(model, resolution=(320, 240), warmup=10, iterations=100):
     latency = elapsed / iterations * 1000
     print(f"\n  FPS: {fps:.1f}")
     print(f"  Latency: {latency:.1f} ms")
-    print(f"  Resolution: {w}x{h} → {w*4}x{h*4}")
+    print(f"  Resolution: {w}x{h} → {w*2}x{h*2}")
     return fps, latency
 
 
@@ -137,13 +151,13 @@ def main():
     print("https://modelpiper.com")
     print()
 
-    if not MODEL_PATH.exists():
-        print(f"Model not found at {MODEL_PATH}")
-        print(f"Download from: https://modelpiper.com/models/pipersr")
+    try:
+        model = load_model()
+    except FileNotFoundError as e:
+        print(e)
         return
-
-    model = load_model()
-    print(f"Model loaded: {MODEL_PATH}")
+    model_path = _find_model()
+    print(f"Model loaded: {model_path}")
 
     if args.dataset:
         print(f"\nPSNR Benchmark ({args.dataset}):")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PiperSR — Real-time 4x super-resolution on Apple Neural Engine.
+PiperSR — Real-time 2x super-resolution on Apple Neural Engine.
 
 First ANE-native SR model. Built by Ben Racicot.
 https://modelpiper.com | https://github.com/ModelPiper/PiperSR
@@ -19,19 +19,29 @@ from PIL import Image
 
 
 MODEL_URL = "https://modelpiper.com/models/pipersr/download"
-MODEL_DIR = Path.home() / ".cache" / "pipersr"
-MODEL_PATH = MODEL_DIR / "pipersr_4x.mlpackage"
+REPO_MODEL = Path(__file__).parent / "PiperSR_2x.mlpackage"
+CACHE_MODEL = Path.home() / ".cache" / "pipersr" / "PiperSR_2x.mlpackage"
+
+
+def _find_model():
+    """Locate the model: repo-local first, then cache."""
+    if REPO_MODEL.exists():
+        return REPO_MODEL
+    if CACHE_MODEL.exists():
+        return CACHE_MODEL
+    raise FileNotFoundError(
+        f"Model not found.\n"
+        f"Expected at: {REPO_MODEL}\n"
+        f"Or cached at: {CACHE_MODEL}\n"
+        f"Download from: https://modelpiper.com/models/pipersr"
+    )
 
 
 def load_model():
     """Load the PiperSR CoreML model for ANE inference."""
-    if not MODEL_PATH.exists():
-        raise FileNotFoundError(
-            f"Model not found at {MODEL_PATH}\n"
-            f"Download from: https://modelpiper.com/models/pipersr"
-        )
+    model_path = _find_model()
     model = ct.models.MLModel(
-        str(MODEL_PATH),
+        str(model_path),
         compute_units=ct.ComputeUnit.CPU_AND_NEURAL_ENGINE,
     )
     return model
@@ -64,7 +74,7 @@ def postprocess(output, key=None):
 
 def upscale(input_path, output_path=None):
     """
-    Upscale an image 4x using PiperSR on Apple Neural Engine.
+    Upscale an image 2x using PiperSR on Apple Neural Engine.
 
     Args:
         input_path: Path to input image.
@@ -92,7 +102,7 @@ def upscale(input_path, output_path=None):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="PiperSR — 4x super-resolution on Apple Neural Engine"
+        description="PiperSR — 2x super-resolution on Apple Neural Engine"
     )
     parser.add_argument("--input", "-i", required=True, help="Input image path")
     parser.add_argument("--output", "-o", default=None, help="Output image path")
@@ -100,7 +110,7 @@ def main():
 
     if args.output is None:
         p = Path(args.input)
-        args.output = str(p.parent / f"{p.stem}_4x{p.suffix}")
+        args.output = str(p.parent / f"{p.stem}_2x{p.suffix}")
 
     upscale(args.input, args.output)
 

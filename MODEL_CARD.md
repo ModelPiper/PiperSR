@@ -5,7 +5,7 @@
 | Field | Value |
 |-------|-------|
 | **Name** | PiperSR |
-| **Task** | Single-image super-resolution (4x) |
+| **Task** | Single-image super-resolution (2x) |
 | **Author** | [Ben Racicot](https://github.com/BenRacicot) |
 | **Organization** | [ModelPiper](https://modelpiper.com) |
 | **Format** | CoreML .mlpackage (fp16) |
@@ -26,7 +26,7 @@ PiperSR is designed for real-time image and video super-resolution on Apple Sili
 **Out of scope:**
 - Medical imaging (not validated for diagnostic use)
 - Satellite/aerial imagery (not trained on this domain)
-- Arbitrary scale factors (4x only)
+- Arbitrary scale factors (2x only)
 
 ## Performance
 
@@ -52,13 +52,13 @@ PiperSR is designed for real-time image and video super-resolution on Apple Sili
 ## Input / Output
 
 - **Input:** RGB image, any resolution (CoreML flexible input shape)
-- **Output:** RGB image at 4x input resolution, fp16 precision
+- **Output:** RGB image at 2x input resolution, fp16 precision
 - **Color space:** sRGB
 
 ## Limitations
 
 - Optimized for natural photographic content. Performance on text, line art, or synthetic images may vary.
-- 4x scale factor only. No 2x or 8x variants at this time.
+- 2x scale factor only. No 4x or 8x variants at this time.
 - Requires Apple Silicon. Will not run on Intel Macs or non-Apple hardware.
 - CoreML format only. No PyTorch, ONNX, or TensorFlow export provided.
 

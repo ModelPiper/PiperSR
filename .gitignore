@@ -6,7 +6,6 @@ __pycache__/
 dist/
 build/
 .eggs/
-*.mlpackage
 *.mlmodel
 .venv/
 venv/

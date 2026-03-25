@@ -2,7 +2,7 @@
 
 **First super-resolution model designed and optimized for Apple Neural Engine.**
 
-4x upscale. Real-time. Runs entirely on the ANE in every Mac, iPhone, and iPad — no GPU, no cloud.
+2x upscale. Real-time. Runs entirely on the ANE in every Mac, iPhone, and iPad — no GPU, no cloud.
 
 | Metric | PiperSR |
 |--------|---------|
@@ -10,7 +10,7 @@
 | **FPS (M2 Max)** | 44.4 |
 | **Compute** | Apple Neural Engine |
 | **Precision** | fp16 |
-| **Scale** | 4x |
+| **Scale** | 2x |
 
 > Built by [Ben Racicot](https://github.com/BenRacicot). Available on [ModelPiper.com](https://modelpiper.com).
 
@@ -26,24 +26,20 @@ pip install pipersr
 from pipersr import upscale
 
 output = upscale("input.png")
-output.save("output_4x.png")
+output.save("output_2x.png")
 ```
 
 Or use the script directly:
 
 ```bash
-python inference.py --input photo.png --output photo_4x.png
+python inference.py --input photo.png --output photo_2x.png
 ```
 
 ## Download
 
-Model weights are hosted on [ModelPiper.com](https://modelpiper.com/models/pipersr).
+The CoreML model (`PiperSR_2x.mlpackage`, 916 KB) is included in this repo. Clone and run — no separate download needed.
 
-The `pipersr` package downloads the CoreML model automatically on first use. To download manually:
-
-```bash
-python -c "from pipersr import download; download()"
-```
+Also available on [ModelPiper.com](https://modelpiper.com/models/pipersr).
 
 ## Benchmarks
 
@@ -63,7 +59,7 @@ Tested on M2 Max, macOS 15+. All models running on the same hardware.
 <table>
 <tr>
 <td><strong>Input (1x)</strong></td>
-<td><strong>PiperSR Output (4x)</strong></td>
+<td><strong>PiperSR Output (2x)</strong></td>
 </tr>
 <tr>
 <td><img src="samples/butterfly_lr.png" width="200"></td>
@@ -94,9 +90,9 @@ Performance scales with ANE generation. M2 Max benchmarks shown above.
 
 ## Model Details
 
-- **Task:** Single-image 4x super-resolution
+- **Task:** Single-image 2x super-resolution
 - **Input:** RGB image, any resolution (CoreML flexible input)
-- **Output:** 4x upscaled RGB image, fp16
+- **Output:** 2x upscaled RGB image, fp16
 - **Format:** CoreML .mlpackage
 - **Compute target:** Apple Neural Engine via `.cpuAndNeuralEngine`
 
