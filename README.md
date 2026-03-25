@@ -110,14 +110,16 @@ PiperSR is an image model. For real-time video super-resolution with frame sched
 
 ## License
 
-- **Code** (inference.py, benchmark.py, pipersr package): [AGPL-3.0](LICENSE)
-- **Model weights** (.mlpackage): [PiperSR Model License](MODEL_LICENSE) — free for personal and academic use, attribution required, commercial use requires a separate license
-
-If you use PiperSR in your project, include:
+**Free for personal, academic, and non-commercial use.** Just include attribution:
 
 ```
 Powered by PiperSR from ModelPiper — https://modelpiper.com
 ```
+
+**Commercial use** (products, services, internal production tools) requires a license from [ModelPiper](https://modelpiper.com). Contact license@modelpiper.com.
+
+- Code: [AGPL-3.0](LICENSE)
+- Model weights: [PiperSR Model License](MODEL_LICENSE)
 
 ## Links
 
