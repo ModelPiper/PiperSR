@@ -110,13 +110,13 @@ PiperSR is an image model. For real-time video super-resolution with frame sched
 
 ## License
 
-**Free for personal, academic, and non-commercial use.** Just include attribution:
+**Free for everyone** — personal, academic, and commercial. Just include a link back:
 
 ```
 Powered by PiperSR from ModelPiper — https://modelpiper.com
 ```
 
-**Commercial use** (products, services, internal production tools) requires a license from [ModelPiper](https://modelpiper.com). Contact license@modelpiper.com.
+That's it. Use it in your app, your product, your research. We just ask for attribution so others can find the project too.
 
 - Code: [AGPL-3.0](LICENSE)
 - Model weights: [PiperSR Model License](MODEL_LICENSE)
