@@ -73,7 +73,7 @@ Super-resolution can enhance images in ways that add plausible but fabricated de
   author = {Racicot, Ben},
   title = {PiperSR: Real-Time Super-Resolution for Apple Neural Engine},
   year = {2026},
-  url = {https://github.com/BenRacicot/PiperSR},
+  url = {https://github.com/ModelPiper/PiperSR},
   note = {Available at https://modelpiper.com}
 }
 ```

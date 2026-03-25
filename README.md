@@ -130,7 +130,7 @@ Powered by PiperSR from ModelPiper — https://modelpiper.com
   author = {Racicot, Ben},
   title = {PiperSR: Real-Time Super-Resolution for Apple Neural Engine},
   year = {2026},
-  url = {https://github.com/BenRacicot/PiperSR},
+  url = {https://github.com/ModelPiper/PiperSR},
   note = {Available at https://modelpiper.com}
 }
 ```

@@ -31,7 +31,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://modelpiper.com"
-Repository = "https://github.com/BenRacicot/PiperSR"
+Repository = "https://github.com/ModelPiper/PiperSR"
 "Model Download" = "https://modelpiper.com/models/pipersr"
 "Real-Time Video" = "https://toolpiper.com"
 

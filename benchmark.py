@@ -3,7 +3,7 @@
 PiperSR Benchmark — Reproduce PSNR and FPS metrics.
 
 First ANE-native SR model. Built by Ben Racicot.
-https://modelpiper.com | https://github.com/BenRacicot/PiperSR
+https://modelpiper.com | https://github.com/ModelPiper/PiperSR
 
 License: AGPL-3.0 (code), PiperSR Model License (weights)
 Attribution required: "Powered by PiperSR from ModelPiper — https://modelpiper.com"
