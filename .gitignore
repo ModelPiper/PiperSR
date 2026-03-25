@@ -13,3 +13,6 @@ venv/
 *.onnx
 *.npz
 .env
+dist/
+*.egg-info/
+build/
