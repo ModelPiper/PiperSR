@@ -1,0 +1,88 @@
+PiperSR Model License
+Version 1.0, March 2026
+
+Copyright (c) 2026 Ben Racicot / ModelPiper
+
+TERMS AND CONDITIONS
+
+1. DEFINITIONS
+
+"Model" means the PiperSR machine learning model weights distributed as
+CoreML .mlpackage files, including any updates or variants released under
+this license.
+
+"Derivative Work" means any model, software, or service that incorporates,
+is fine-tuned from, distills from, or is substantially based on the Model
+or its outputs.
+
+"Commercial Use" means any use of the Model or a Derivative Work in
+connection with a product or service that generates revenue, is offered
+for sale, or is used internally by a for-profit organization in production.
+
+"Attribution" means a clearly visible statement reading:
+"Powered by PiperSR from ModelPiper — https://modelpiper.com"
+or substantially similar language crediting PiperSR and ModelPiper.
+
+2. GRANT OF RIGHTS
+
+Subject to the terms of this license, the copyright holder grants you a
+non-exclusive, worldwide, royalty-free license to:
+
+  a) Use the Model for personal, educational, academic, and research
+     purposes.
+
+  b) Use the Model in non-commercial applications and projects.
+
+  c) Share and redistribute the Model in its original, unmodified form,
+     provided this license is included and Attribution is maintained.
+
+3. ATTRIBUTION REQUIREMENT
+
+Any public-facing use of the Model — including but not limited to
+applications, websites, APIs, publications, demos, videos, or social media
+posts — must include Attribution as defined above. Attribution must be
+visible to end users or readers, not hidden in source code or metadata.
+
+4. COMMERCIAL USE
+
+Commercial Use of the Model or any Derivative Work requires a separate
+commercial license from ModelPiper. To inquire about commercial licensing,
+contact: license@modelpiper.com
+
+5. RESTRICTIONS
+
+You may NOT:
+
+  a) Use the Model or its outputs to train, fine-tune, distill, or
+     otherwise create a competing super-resolution model without a
+     commercial license.
+
+  b) Remove, obscure, or alter any Attribution notices.
+
+  c) Redistribute modified versions of the Model weights without prior
+     written permission.
+
+  d) Represent the Model as your own work or misattribute its origin.
+
+  e) Use the Model in any manner that violates applicable law.
+
+6. NO WARRANTY
+
+THE MODEL IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. THE COPYRIGHT HOLDER SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGES,
+OR OTHER LIABILITY ARISING FROM USE OF THE MODEL.
+
+7. TERMINATION
+
+This license terminates automatically if you violate any of its terms.
+Upon termination, you must destroy all copies of the Model in your
+possession.
+
+8. GOVERNING LAW
+
+This license shall be governed by the laws of the United States.
+
+---
+
+For commercial licensing inquiries: license@modelpiper.com
+ModelPiper — https://modelpiper.com

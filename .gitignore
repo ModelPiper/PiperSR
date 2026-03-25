@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+*.egg-info/
+dist/
+build/
+.eggs/
+*.mlpackage
+*.mlmodel
+.venv/
+venv/
+*.pt
+*.onnx
+*.npz
+.env

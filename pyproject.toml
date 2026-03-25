@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "pipersr"
+version = "1.0.0"
+description = "First super-resolution model designed for Apple Neural Engine. 4x upscale, real-time, on-device."
+readme = "README.md"
+license = "AGPL-3.0-only"
+requires-python = ">=3.10"
+authors = [
+    {name = "Ben Racicot", email = "license@modelpiper.com"},
+]
+keywords = ["super-resolution", "apple-neural-engine", "coreml", "apple-silicon", "upscale"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+dependencies = [
+    "coremltools>=7.0",
+    "numpy",
+    "Pillow",
+]
+
+[project.urls]
+Homepage = "https://modelpiper.com"
+Repository = "https://github.com/BenRacicot/PiperSR"
+"Model Download" = "https://modelpiper.com/models/pipersr"
+"Real-Time Video" = "https://toolpiper.com"
+
+[project.scripts]
+pipersr = "pipersr.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["pipersr*"]
