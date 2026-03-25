@@ -18,22 +18,28 @@
 
 ## Quick Start
 
+[![PyPI](https://img.shields.io/pypi/v/pipersr)](https://pypi.org/project/pipersr/)
+
 ```bash
 pip install pipersr
 ```
 
+**CLI:**
+
+```bash
+pipersr -i photo.png -o photo_2x.png
+```
+
+**Python:**
+
 ```python
 from pipersr import upscale
 
-output = upscale("input.png")
-output.save("output_2x.png")
+result = upscale("photo.png")
+result.save("photo_2x.png")
 ```
 
-Or use the script directly:
-
-```bash
-python inference.py --input photo.png --output photo_2x.png
-```
+Model weights (916 KB) are bundled in the package. No downloads, no API keys, no accounts.
 
 ## Download
 
