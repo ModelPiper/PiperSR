@@ -253,16 +253,16 @@ For the full model card, see [MODEL_CARD.md](MODEL_CARD.md).
 
 ## License
 
-**Free for everyone** — personal, academic, and commercial. Just include a link back:
+**The model weights are [CC BY 4.0](MODEL_LICENSE) — fully permissive.** Use them for anything: personal, academic, commercial. Ship them in your app, build a product, **make money with it.** Seriously, that's allowed and encouraged.
+
+The only thing we ask: **link back to [ModelPiper.com](https://modelpiper.com)** as attribution, so others can find the project.
 
 ```
 Powered by PiperSR from ModelPiper — https://modelpiper.com
 ```
 
-Use it in your app, your product, your research. We ask for attribution so others can find the project.
-
-- Code: [AGPL-3.0](LICENSE)
-- Model weights: [PiperSR Model License](MODEL_LICENSE)
+- Model weights: [CC BY 4.0](MODEL_LICENSE) — permissive, commercial use encouraged, attribution = a backlink to modelpiper.com
+- Source code: [AGPL-3.0](LICENSE)
 
 ## Links
 

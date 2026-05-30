@@ -83,4 +83,4 @@ Super-resolution can enhance images in ways that add plausible but fabricated de
 - Model & weights: [ModelPiper.com](https://modelpiper.com)
 - Real-time video: [ToolPiper](https://modelpiper.com)
 - Author: [Ben Racicot](https://github.com/BenRacicot)
-- Commercial licensing: license@modelpiper.com
+- Questions / enterprise support: license@modelpiper.com
