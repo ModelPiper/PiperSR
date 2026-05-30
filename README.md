@@ -2,7 +2,7 @@
 
 **First super-resolution model designed and optimized for Apple Neural Engine.**
 
-2x upscale. 453K parameters. 928 KB. Real-time video at 48 FPS. Runs entirely on the ANE in every Mac, iPhone, and iPad — zero GPU, zero cloud.
+2x upscale. 453K parameters. 928 KB. Real-time video at 44.4 FPS. Runs entirely on the ANE in every Mac, iPhone, and iPad — zero GPU, zero cloud.
 
 ---
 
@@ -17,8 +17,8 @@
 | **PSNR (Set14)** | 33.21 dB |
 | **PSNR (BSD100)** | 31.98 dB |
 | **PSNR (Urban100)** | 31.38 dB |
-| **FPS (360p → 720p)** | 48 FPS (M2 Max) |
-| **ANE latency** | 20.8 ms/frame |
+| **FPS (360p → 720p)** | 44.4 FPS (M2 Max) |
+| **ANE latency** | 22.5 ms/frame |
 | **Compute** | Apple Neural Engine only |
 | **CPU/GPU fallback ops** | Zero |
 | **Precision** | FP16 |
@@ -69,7 +69,7 @@ No other model in this parameter class was designed for ANE. These are real meas
 
 | Model | Hardware | FPS | Compute | Real-time? |
 |---|---|---:|---|---|
-| **PiperSR** | **M2 Max** | **48** | **ANE** | **Yes (1.6x real-time)** |
+| **PiperSR** | **M2 Max** | **44.4** | **ANE** | **Yes (1.5x real-time)** |
 | SPAN | M2 Mac (ailia) | ~7 | GPU | No |
 | Real-ESRGAN | M2 Mac (ailia) | ~0.3 | GPU | No |
 
@@ -83,12 +83,12 @@ PiperSR is **0.5 dB below SPAN** on Set5 (37.54 vs 38.06). That's the cost of bu
 |---|---|---|
 | Set5 PSNR | 37.54 dB | 38.06 dB |
 | Model size | 928 KB | ~1.7 MB |
-| Apple Silicon FPS | 48 (ANE) | ~7 (GPU) |
+| Apple Silicon FPS | 44.4 (ANE) | ~7 (GPU) |
 | Real-time video | Yes | No |
 | GPU usage | 0% | 100% |
 | Runs on iPhone/iPad | Yes (ANE) | Requires GPU |
 
-0.5 dB is below the perceptual threshold for most content. 48 FPS vs ~7 FPS is the difference between real-time video and a slideshow.
+0.5 dB is below the perceptual threshold for most content. 44.4 FPS vs ~7 FPS is the difference between real-time video and a slideshow.
 
 ---
 
@@ -165,13 +165,13 @@ Input (H×W×3, FP16)
 For real-time video, PiperSR uses a double-buffered pipeline where each hardware unit works on a different frame simultaneously:
 
 ```
-Frame N:    [CPU convertIn] → [ANE predict: 20.8ms] → [Metal GPU convertOut]
-Frame N+1:                    [CPU convertIn] ─────── → [ANE predict: 20.8ms] → ...
+Frame N:    [CPU convertIn] → [ANE predict: 22.5ms] → [Metal GPU convertOut]
+Frame N+1:                    [CPU convertIn] ─────── → [ANE predict: 22.5ms] → ...
 ```
 
 | Resolution | Input → Output | ANE Predict | Streaming FPS | Real-time? |
 |---|---|---:|---:|---|
-| 360p | 640×360 → 1280×720 | 20.8 ms | 48 FPS | 1.6x real-time |
+| 360p | 640×360 → 1280×720 | 22.5 ms | 44.4 FPS | 1.5x real-time |
 | 480p | 854×480 → 1708×960 | 32.7 ms | 30 FPS | 1.0x real-time |
 | 720p | 1280×720 → 2560×1440 | 71.6 ms | 14 FPS | No |
 
@@ -204,7 +204,7 @@ python benchmark.py --resolution 640x360 --iterations 200
 
 | Hardware | Mode | FPS | Latency |
 |---|---|---:|---:|
-| M2 Max | Full-frame 360p | 48.0 | 20.8 ms |
+| M2 Max | Full-frame 360p | 44.4 | 22.5 ms |
 | M2 Max | Full-frame 480p | 30.0 | 32.7 ms |
 | M2 Max | Full-frame 720p | 14.0 | 71.6 ms |
 | M2 | Tiled 128×128 (static weights) | 125.6 | 7.96 ms |

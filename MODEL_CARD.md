@@ -43,7 +43,7 @@ PiperSR is designed for real-time image and video super-resolution on Apple Sili
 
 | Hardware | FPS | Latency (ms) |
 |----------|-----|---------------|
-| M2 Max | 48.0 | 20.8 |
+| M2 Max | 44.4 | 22.5 |
 | M1 | — | — |
 | M3 Pro | — | — |
 
