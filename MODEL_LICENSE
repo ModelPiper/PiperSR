@@ -1,0 +1,28 @@
+PiperSR Model Weights -- License
+
+The PiperSR machine-learning model weights (the CoreML .mlpackage files in this
+repository) are licensed under the Creative Commons Attribution 4.0 International
+License (CC BY 4.0).
+
+You are free to:
+  - Share -- copy and redistribute the weights in any medium or format
+  - Adapt -- remix, transform, and build upon the weights, including commercially
+
+Under the following term:
+  - Attribution -- You must give appropriate credit to
+    "PiperSR by Ben Racicot / ModelPiper (https://modelpiper.com)", provide a link
+    to this license, and indicate if changes were made.
+
+Full legal text:  https://creativecommons.org/licenses/by/4.0/legalcode
+Summary:          https://creativecommons.org/licenses/by/4.0/
+
+SPDX-License-Identifier: CC-BY-4.0
+
+Note: the SOURCE CODE in this repository (training, inference, scripts) is
+licensed separately under AGPL-3.0 (see LICENSE). This file governs the model
+WEIGHTS only.
+
+Suggested citation:
+  PiperSR -- 2x super-resolution for the Apple Neural Engine.
+  Ben Racicot / ModelPiper. https://modelpiper.com
+  https://github.com/ModelPiper/PiperSR
