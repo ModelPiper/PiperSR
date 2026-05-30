@@ -11,7 +11,7 @@
 | **Format** | CoreML .mlpackage (fp16) |
 | **Target Hardware** | Apple Neural Engine (Apple Silicon) |
 | **Compute Units** | `.cpuAndNeuralEngine` |
-| **License** | [PiperSR Model License](MODEL_LICENSE) |
+| **License** | [CC BY 4.0](MODEL_LICENSE) |
 
 ## Intended Use
 
@@ -19,7 +19,7 @@ PiperSR is designed for real-time image and video super-resolution on Apple Sili
 
 **Primary use cases:**
 - Photo enhancement and upscaling
-- Real-time video upscaling (via [ToolPiper](https://toolpiper.com))
+- Real-time video upscaling (via [ToolPiper](https://modelpiper.com))
 - On-device preprocessing for downstream vision tasks
 - Research and benchmarking of ANE inference
 
@@ -81,6 +81,6 @@ Super-resolution can enhance images in ways that add plausible but fabricated de
 ## Contact
 
 - Model & weights: [ModelPiper.com](https://modelpiper.com)
-- Real-time video: [ToolPiper](https://toolpiper.com)
+- Real-time video: [ToolPiper](https://modelpiper.com)
 - Author: [Ben Racicot](https://github.com/BenRacicot)
 - Commercial licensing: license@modelpiper.com

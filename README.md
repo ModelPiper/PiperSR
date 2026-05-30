@@ -175,7 +175,7 @@ Frame N+1:                    [CPU convertIn] ─────── → [ANE pre
 | 480p | 854×480 → 1708×960 | 32.7 ms | 30 FPS | 1.0x real-time |
 | 720p | 1280×720 → 2560×1440 | 71.6 ms | 14 FPS | No |
 
-Available in [ToolPiper](https://toolpiper.com) for real-time video upscaling on macOS.
+Available in [ToolPiper](https://modelpiper.com) for real-time video upscaling on macOS.
 
 ---
 
@@ -234,7 +234,7 @@ Performance scales with ANE generation. M2 Max benchmarks shown above.
 
 ## For Video & Real-Time
 
-PiperSR is an image model. For real-time video super-resolution with double-buffered frame scheduling, Metal GPU output conversion, and streaming — see [ToolPiper](https://toolpiper.com), which integrates PiperSR into a production video pipeline.
+PiperSR is an image model. For real-time video super-resolution with double-buffered frame scheduling, Metal GPU output conversion, and streaming — see [ToolPiper](https://modelpiper.com), which integrates PiperSR into a production video pipeline.
 
 ---
 
@@ -267,7 +267,7 @@ Use it in your app, your product, your research. We ask for attribution so other
 ## Links
 
 - [ModelPiper.com](https://modelpiper.com) — Download PiperSR, browse benchmarks, explore on-device models
-- [ToolPiper](https://toolpiper.com) — Local macOS AI toolkit with real-time video upscaling
+- [ToolPiper](https://modelpiper.com) — Local macOS AI toolkit with real-time video upscaling
 - [Ben Racicot](https://github.com/BenRacicot) — Author
 
 ## Citation
