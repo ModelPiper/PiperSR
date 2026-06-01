@@ -9,11 +9,11 @@ Usage:
     result = upscale("photo.png")
     result.save("photo_2x.png")
 
-License: AGPL-3.0 (code), PiperSR Model License (weights)
+License: AGPL-3.0 (code), CC BY 4.0 (weights)
 Attribution required: "Powered by PiperSR from ModelPiper — https://modelpiper.com"
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 import time
 from pathlib import Path
@@ -48,13 +48,16 @@ def load_model():
     model_path = _find_model()
     return ct.models.MLModel(
         str(model_path),
-        compute_units=ct.ComputeUnit.CPU_AND_NEURAL_ENGINE,
+        compute_units=ct.ComputeUnit.CPU_AND_NE,
     )
 
 
 def upscale(input_path, output_path=None):
     """
     Upscale an image 2x using PiperSR on Apple Neural Engine.
+
+    The model runs on fixed-size tiles; images of any size are split into tiles,
+    upscaled on the ANE, and stitched back together.
 
     Args:
         input_path: Path to input image (str or Path).
@@ -64,25 +67,31 @@ def upscale(input_path, output_path=None):
         PIL Image of the upscaled result.
     """
     model = load_model()
+    spec = model.get_spec()
+    in_name = spec.description.input[0].name
+    out_name = spec.description.output[0].name
+    tile = spec.description.input[0].type.imageType.width
+    scale = spec.description.output[0].type.imageType.width // tile
 
     img = Image.open(input_path).convert("RGB")
-    arr = np.array(img, dtype=np.float32) / 255.0
-    arr = np.transpose(arr, (2, 0, 1))[np.newaxis]
+    w, h = img.size
+    pad_w = (tile - w % tile) % tile
+    pad_h = (tile - h % tile) % tile
+    canvas = Image.new("RGB", (w + pad_w, h + pad_h))
+    canvas.paste(img, (0, 0))
+    out = Image.new("RGB", (canvas.width * scale, canvas.height * scale))
 
     t0 = time.perf_counter()
-    result = model.predict({"input": arr})
+    for y in range(0, canvas.height, tile):
+        for x in range(0, canvas.width, tile):
+            t = canvas.crop((x, y, x + tile, y + tile))
+            r = model.predict({in_name: t})[out_name]
+            if not isinstance(r, Image.Image):
+                r = Image.fromarray(np.asarray(r))
+            out.paste(r, (x * scale, y * scale))
     elapsed = time.perf_counter() - t0
 
-    key = list(result.keys())[0]
-    out = result[key]
-    if hasattr(out, "numpy"):
-        out = out.numpy()
-    out = np.squeeze(out)
-    if out.ndim == 3 and out.shape[0] in (1, 3):
-        out = np.transpose(out, (1, 2, 0))
-    out_img = Image.fromarray(np.clip(out * 255.0, 0, 255).astype(np.uint8))
-
-    w, h = img.size
+    out_img = out.crop((0, 0, w * scale, h * scale))
     print(f"PiperSR: {w}x{h} → {out_img.width}x{out_img.height} in {elapsed*1000:.1f}ms (ANE)")
 
     if output_path:
