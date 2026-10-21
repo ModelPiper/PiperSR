@@ -13,7 +13,7 @@ License: AGPL-3.0 (code), CC BY 4.0 (weights)
 Attribution required: "Powered by PiperSR from ModelPiper — https://modelpiper.com"
 """
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 import time
 from pathlib import Path
@@ -39,7 +39,7 @@ def _find_model():
     raise FileNotFoundError(
         f"PiperSR model not found.\n"
         f"Searched: {', '.join(str(p) for p in _SEARCH_PATHS)}\n"
-        f"Download from: https://modelpiper.com/models/pipersr"
+        f"Download from: https://huggingface.co/ModelPiper/PiperSR-2x"
     )
 
 
