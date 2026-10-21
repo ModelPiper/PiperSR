@@ -52,6 +52,43 @@ def load_model():
     )
 
 
+def _upscale_tiles(model, img, overlap=8):
+    """Upscale an RGB PIL image with a loaded model, tile by tile.
+
+    Tiles overlap by `overlap` pixels on each side and only their centers are kept,
+    so pixels near tile seams still see their neighbours.
+    """
+    spec = model.get_spec()
+    in_name = spec.description.input[0].name
+    out_name = spec.description.output[0].name
+    tile = spec.description.input[0].type.imageType.width
+    scale = spec.description.output[0].type.imageType.width // tile
+    step = tile - 2 * overlap
+
+    w, h = img.size
+    nx = -(-w // step)
+    ny = -(-h // step)
+    # Mirror-pad the borders; black padding bleeds dark edges into the result
+    canvas = Image.fromarray(np.pad(
+        np.asarray(img),
+        ((overlap, ny * step - h + overlap), (overlap, nx * step - w + overlap), (0, 0)),
+        mode="reflect",
+    ))
+    out = Image.new("RGB", (nx * step * scale, ny * step * scale))
+    m = overlap * scale
+
+    for j in range(ny):
+        for i in range(nx):
+            x, y = i * step, j * step
+            t = canvas.crop((x, y, x + tile, y + tile))
+            r = model.predict({in_name: t})[out_name]
+            if not isinstance(r, Image.Image):
+                r = Image.fromarray(np.asarray(r))
+            out.paste(r.crop((m, m, m + step * scale, m + step * scale)), (x * scale, y * scale))
+
+    return out.crop((0, 0, w * scale, h * scale))
+
+
 def upscale(input_path, output_path=None):
     """
     Upscale an image 2x using PiperSR on Apple Neural Engine.
@@ -67,31 +104,13 @@ def upscale(input_path, output_path=None):
         PIL Image of the upscaled result.
     """
     model = load_model()
-    spec = model.get_spec()
-    in_name = spec.description.input[0].name
-    out_name = spec.description.output[0].name
-    tile = spec.description.input[0].type.imageType.width
-    scale = spec.description.output[0].type.imageType.width // tile
-
     img = Image.open(input_path).convert("RGB")
     w, h = img.size
-    pad_w = (tile - w % tile) % tile
-    pad_h = (tile - h % tile) % tile
-    canvas = Image.new("RGB", (w + pad_w, h + pad_h))
-    canvas.paste(img, (0, 0))
-    out = Image.new("RGB", (canvas.width * scale, canvas.height * scale))
 
     t0 = time.perf_counter()
-    for y in range(0, canvas.height, tile):
-        for x in range(0, canvas.width, tile):
-            t = canvas.crop((x, y, x + tile, y + tile))
-            r = model.predict({in_name: t})[out_name]
-            if not isinstance(r, Image.Image):
-                r = Image.fromarray(np.asarray(r))
-            out.paste(r, (x * scale, y * scale))
+    out_img = _upscale_tiles(model, img)
     elapsed = time.perf_counter() - t0
 
-    out_img = out.crop((0, 0, w * scale, h * scale))
     print(f"PiperSR: {w}x{h} → {out_img.width}x{out_img.height} in {elapsed*1000:.1f}ms (ANE)")
 
     if output_path:

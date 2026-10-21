@@ -12,6 +12,7 @@
 | **Target Hardware** | Apple Neural Engine (Apple Silicon) |
 | **Compute Units** | `.cpuAndNeuralEngine` |
 | **License** | [CC BY 4.0](MODEL_LICENSE) |
+| **Training data** | LSDIR + DIV2K (85,791 images), L1 + wavelet loss, 64 → 128 px progressive patches |
 
 ## Intended Use
 
@@ -19,7 +20,7 @@ PiperSR is designed for real-time image and video super-resolution on Apple Sili
 
 **Primary use cases:**
 - Photo enhancement and upscaling
-- Real-time video upscaling (via [ToolPiper](https://modelpiper.com))
+- Real-time 360p → 720p video upscaling (via [ToolPiper Studio](https://modelpiper.com))
 - On-device preprocessing for downstream vision tasks
 - Research and benchmarking of ANE inference
 
@@ -35,24 +36,25 @@ PiperSR is designed for real-time image and video super-resolution on Apple Sili
 | Dataset | PiperSR |
 |---------|---------|
 | Set5 | 37.54 |
-| Set14 | — |
-| BSD100 | — |
-| Urban100 | — |
+| Set14 | 33.16 |
+| BSD100 | 31.99 |
+
+Scores are for the shipped CoreML model (FP16, 128px tiles). The PyTorch training checkpoint scored 37.54 / 33.21 / 31.98.
+
+No Urban100 score is reported: its 100 test images were accidentally included in the training data, so a score on them would not be a fair test.
 
 ### Inference Speed
 
 | Hardware | FPS | Latency (ms) |
 |----------|-----|---------------|
 | M2 Max | 44.4 | 22.5 |
-| M1 | — | — |
-| M3 Pro | — | — |
 
-> Benchmarks measured with `benchmark.py`. We encourage independent reproduction.
+> PSNR is Y channel with a 2px border crop. `python benchmark.py --dataset /path/to/Set5` reproduces these scores. We encourage independent reproduction.
 
 ## Input / Output
 
-- **Input:** RGB image, any resolution (CoreML flexible input shape)
-- **Output:** RGB image at 2x input resolution, fp16 precision
+- **Input:** 128×128 RGB image tile (`input_image`). The `pipersr` package splits images of any size into tiles and stitches the result
+- **Output:** 256×256 RGB image tile (`output_image`)
 - **Color space:** sRGB
 
 ## Limitations
@@ -81,6 +83,6 @@ Super-resolution can enhance images in ways that add plausible but fabricated de
 ## Contact
 
 - Model & weights: [ModelPiper.com](https://modelpiper.com)
-- Real-time video: [ToolPiper](https://modelpiper.com)
+- Real-time video: [ToolPiper Studio](https://modelpiper.com)
 - Author: [Ben Racicot](https://github.com/BenRacicot)
 - Questions / enterprise support: license@modelpiper.com

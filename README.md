@@ -2,11 +2,11 @@
 
 **First super-resolution model designed and optimized for Apple Neural Engine.**
 
-2x upscale. 453K parameters. 928 KB. Real-time video at 44.4 FPS. Runs entirely on the ANE in every Mac, iPhone, and iPad — zero GPU, zero cloud.
+2x upscale. 453K parameters. 928 KB. Real-time 360p → 720p video at 44.4 FPS. Runs entirely on the ANE in every Mac, iPhone, and iPad — zero GPU, zero cloud.
 
 ## Get PiperSR
 
-- **ToolPiper (recommended):** the main way to use PiperSR. A local macOS AI toolkit with real-time video upscaling, free at [ModelPiper.com](https://modelpiper.com).
+- **ToolPiper Studio (recommended):** the main way to use PiperSR. A local macOS AI toolkit with real-time 360p → 720p video upscaling, at [ModelPiper.com](https://modelpiper.com).
 - **[Hugging Face](https://huggingface.co/ModelPiper/PiperSR-2x):** CoreML packages, plus 256px and 720p video variants.
 - **[PyPI](https://pypi.org/project/pipersr/):** `pip install pipersr`, then `pipersr -i photo.png`. See [Quick Start](#quick-start).
 
@@ -20,9 +20,8 @@
 | **Model size** | 928 KB (CoreML FP16) |
 | **Scale factor** | 2x |
 | **PSNR (Set5)** | 37.54 dB |
-| **PSNR (Set14)** | 33.21 dB |
-| **PSNR (BSD100)** | 31.98 dB |
-| **PSNR (Urban100)** | 31.38 dB |
+| **PSNR (Set14)** | 33.16 dB |
+| **PSNR (BSD100)** | 31.99 dB |
 | **FPS (360p → 720p)** | 44.4 FPS (M2 Max) |
 | **ANE latency** | 22.5 ms/frame |
 | **Compute** | Apple Neural Engine only |
@@ -36,60 +35,56 @@
 
 ### Quality vs. Parameter Count (2x upscale)
 
-Models sorted by parameter count. PSNR measured on standard academic benchmarks (bicubic degradation).
+Models sorted by parameter count (2x models). Y-channel PSNR in dB on standard benchmarks with bicubic degradation, taken from each model's paper.
 
-| Model | Params | Size | Set5 | Set14 | BSD100 | Urban100 | Year |
-|---|---:|---:|---:|---:|---:|---:|---|
-| FSRCNN | 12K | ~50 KB | 36.94 | 32.54 | 31.73 | — | 2016 |
-| ESPCN | ~20K | ~100 KB | ~36.7 | ~34.5 | ~34.3 | — | 2016 |
-| **SPAN-S** | **426K** | **~1.7 MB** | **38.06** | **33.73** | **32.21** | **32.20** | **2024** |
-| **PiperSR** | **453K** | **928 KB** | **37.54** | **33.21** | **31.98** | **31.38** | **2026** |
-| SPAN | 498K | ~2 MB | 38.08 | 33.71 | 32.22 | 32.24 | 2024 |
-| OmniSR | 792K | 3.3 MB | 38.12 | 33.70 | 32.22 | 32.38 | 2023 |
-| SwinIR-light | 878K | ~3.5 MB | 38.14 | 33.86 | 32.31 | 32.76 | 2021 |
-| EDSR-baseline | 1.5M | ~6 MB | 38.02 | 33.57 | 32.12 | — | 2017 |
-| SwinIR | 11.9M | ~48 MB | 38.42 | 34.46 | 32.53 | 33.81 | 2021 |
-| Real-ESRGAN | 16.7M | 64 MB | — | — | — | — | 2021 |
-| HAT | 20.8M | ~80 MB | 38.63 | 34.86 | 32.62 | 34.45 | 2023 |
+| Model | Params | Set5 | Set14 | BSD100 | Urban100 | Year | Paper |
+|---|---:|---:|---:|---:|---:|---|---|
+| FSRCNN | 12K | 37.00 | 32.63 | 31.53 | 29.88 | 2016 | [ECCV 2016](https://arxiv.org/abs/1608.00367) |
+| ESPCN | 21K | 36.83 | 32.40 | 31.29 | 29.48 | 2016 | [CVPR 2016](https://arxiv.org/abs/1609.05158) |
+| SAFMN | 228K | 38.00 | 33.54 | 32.16 | 31.84 | 2023 | [ICCV 2023](https://arxiv.org/abs/2302.13800) |
+| BSRN | 332K | 38.10 | 33.74 | 32.24 | 32.34 | 2022 | [CVPRW 2022](https://arxiv.org/abs/2205.05996) |
+| ShuffleMixer | 394K | 38.01 | 33.63 | 32.17 | 31.89 | 2022 | [NeurIPS 2022](https://arxiv.org/abs/2205.15175) |
+| SPAN-S | 411K | 38.06 | 33.73 | 32.21 | 32.20 | 2024 | [CVPRW 2024](https://arxiv.org/abs/2311.12770) |
+| **PiperSR** | **453K** | **37.54** | **33.16** | **31.99** | **—** | **2026** | this repo |
+| SPAN | 481K | 38.08 | 33.71 | 32.22 | 32.24 | 2024 | [CVPRW 2024](https://arxiv.org/abs/2311.12770) |
+| Omni-SR | 772K | 38.22 | 33.98 | 32.36 | 33.05 | 2023 | [CVPR 2023](https://arxiv.org/abs/2304.10244) |
+| SwinIR-light | 878K | 38.14 | 33.86 | 32.31 | 32.76 | 2021 | [ICCVW 2021](https://arxiv.org/abs/2108.10257) |
+| EDSR-baseline | 1.37M | 37.99 | 33.57 | 32.16 | 31.98 | 2017 | [CVPRW 2017](https://arxiv.org/abs/1707.02921) |
+| SwinIR | 11.8M | 38.42 | 34.46 | 32.53 | 33.81 | 2021 | [ICCVW 2021](https://arxiv.org/abs/2108.10257) |
+| Real-ESRGAN | 16.7M | — | — | — | — | 2021 | [ICCVW 2021](https://arxiv.org/abs/2107.10833) |
+| HAT | 20.6M | 38.63 | 34.86 | 32.62 | 34.45 | 2023 | [CVPR 2023](https://arxiv.org/abs/2205.04437) |
 
-> Real-ESRGAN is GAN-trained for perceptual quality on real-world degradations, not bicubic benchmarks — PSNR comparison is not applicable.
+> Exceptions to "from each paper": FSRCNN's BSD100 and Urban100 scores are from [CARN](https://arxiv.org/abs/1803.08664) (Table 1). ESPCN's paper has no 2x results, so its row is the retrain cited by ShuffleMixer and SAFMN. EDSR-baseline's row is from [IMDN](https://arxiv.org/abs/1909.11856) (Table 5). Models were trained on DIV2K or DF2K; see each paper.
+>
+> Real-ESRGAN is GAN-trained for perceptual quality on real-world degradations, not bicubic benchmarks. Its paper reports no PSNR, so a PSNR comparison is not applicable.
+>
+> PiperSR has no Urban100 score: its 100 test images were accidentally included in PiperSR's training data, so a score on them would not be a fair test.
 
-### Size Comparison
+### Size
 
-```
-PiperSR     928 KB  ██
-SPAN-S     ~1.7 MB  ███
-SPAN       ~2.0 MB  ████
-OmniSR      3.3 MB  ██████
-SwinIR-lt  ~3.5 MB  ███████
-EDSR-base  ~6.0 MB  ████████████
-SwinIR     ~48  MB  ████████████████████████████████████████████████████████████████████████████████████████████████
-Real-ESRGAN  64 MB  █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-```
+PiperSR has 453K parameters: about half as many as SwinIR-light and 37x fewer than Real-ESRGAN. The whole CoreML package is 928 KB at FP16.
 
-PiperSR is **69x smaller** than Real-ESRGAN and **4x smaller** than SwinIR-light.
-
-### Speed: Apple Silicon (2x upscale, 360p → 720p)
+### Speed: Apple Silicon
 
 No other model in this parameter class was designed for ANE. These are real measurements, not theoretical throughput.
 
-| Model | Hardware | FPS | Compute | Real-time? |
-|---|---|---:|---|---|
-| **PiperSR** | **M2 Max** | **44.4** | **ANE** | **Yes (1.5x real-time)** |
-| SPAN | M2 Mac (ailia) | ~7 | GPU | No |
-| Real-ESRGAN | M2 Mac (ailia) | ~0.3 | GPU | No |
+| Model | Task | Hardware | FPS | Compute | Real-time? |
+|---|---|---|---:|---|---|
+| **PiperSR** | **2x, 640×360 → 1280×720** | **M2 Max** | **44.4** | **ANE** | **Yes (1.5x real-time)** |
+| SPAN-S | 4x, 510×339 input | M2 Mac (ailia) | ~7 | GPU | No |
+| Real-ESRGAN | 3.5x, 510×339 input | M2 Mac (ailia) | ~0.3 | GPU | No |
 
-> SPAN and Real-ESRGAN measurements from ailia SDK M2 Mac benchmarks. PiperSR is **~7x faster** than SPAN and **~160x faster** than Real-ESRGAN on the same hardware family.
+> SPAN-S and Real-ESRGAN timings are from ailia's [SPAN write-up](https://tech.ailia.ai/en/span-efficient-super-resolution-model-using-parameter-free-attention-d938764aa208/) (139 ms and 2,989 ms per image on an M2 Mac GPU via MPS). Those runs use a different scale and input size, so treat this as a rough comparison rather than a like-for-like benchmark.
 
 ### The Tradeoff
 
-PiperSR is **0.5 dB below SPAN** on Set5 (37.54 vs 38.06). That's the cost of building for ANE instead of GPU. Here's what you get in return:
+PiperSR is **0.5 dB below SPAN-S** on Set5 (37.54 vs 38.06). That's the cost of building for ANE instead of GPU. Here's what you get in return:
 
 | | PiperSR | SPAN-S |
 |---|---|---|
 | Set5 PSNR | 37.54 dB | 38.06 dB |
-| Model size | 928 KB | ~1.7 MB |
-| Apple Silicon FPS | 44.4 (ANE) | ~7 (GPU) |
+| Parameters | 453K | 411K |
+| Apple Silicon FPS | 44.4 (ANE) | ~7 (GPU, see above) |
 | Real-time video | Yes | No |
 | GPU usage | 0% | 100% |
 | Runs on iPhone/iPad | Yes (ANE) | Requires GPU |
@@ -153,7 +148,7 @@ Input (H×W×3, FP16)
   Output (2H×2W×3, FP16)
 ```
 
-**453K parameters. 5 unique MIL ops.** Every operation — `conv`, `batch_norm`, `silu`, `add`, `pixel_shuffle` — is native to the Neural Engine instruction set. Zero ops fall back to CPU or GPU.
+**453K parameters. 5 network ops.** The compiled model is just `conv`, `silu`, `add`, `pixel_shuffle` and `clip` (BatchNorm is fused into the convolutions at export). CoreML's compute plan places every one of them on the Neural Engine. Only the input image scaling runs on CPU.
 
 ### Why These Choices
 
@@ -181,7 +176,7 @@ Frame N+1:                    [CPU convertIn] ─────── → [ANE pre
 | 480p | 854×480 → 1708×960 | 32.7 ms | 30 FPS | 1.0x real-time |
 | 720p | 1280×720 → 2560×1440 | 71.6 ms | 14 FPS | No |
 
-Available in [ToolPiper](https://modelpiper.com) for real-time video upscaling on macOS.
+Available in [ToolPiper Studio](https://modelpiper.com) for real-time video upscaling on macOS.
 
 ---
 
@@ -190,21 +185,24 @@ Available in [ToolPiper](https://modelpiper.com) for real-time video upscaling o
 Reproducible. Run `python benchmark.py` on your own hardware.
 
 ```bash
-# PSNR evaluation (requires Set5 dataset with LR/ and HR/ directories)
+# PSNR on Set5 (HR images in HR/, bicubic x2 inputs in LR/)
 python benchmark.py --dataset /path/to/Set5
 
-# FPS benchmark at 360p
+# Tiled FPS at 360p
 python benchmark.py --resolution 640x360 --iterations 200
 ```
+
+PSNR is measured on the Y channel with a 2px border crop, the standard for SR papers. `benchmark.py` reproduces every PiperSR score in this README from the shipped CoreML model, using [Set5 from Hugging Face](https://huggingface.co/datasets/eugenesiow/Set5) and the [EDSR benchmark sets](https://cv.snu.ac.kr/research/EDSR/benchmark.tar). Its FPS mode times the bundled 128px tile model from Python. The full-frame numbers below come from the double-buffered video pipeline described above.
 
 ### Full PSNR Results
 
 | Dataset | PiperSR | Bicubic | Delta |
 |---|---:|---:|---:|
 | Set5 | 37.54 dB | 33.66 dB | +3.88 dB |
-| Set14 | 33.21 dB | 30.24 dB | +2.97 dB |
-| BSD100 | 31.98 dB | 29.56 dB | +2.42 dB |
-| Urban100 | 31.38 dB | 26.88 dB | +4.50 dB |
+| Set14 | 33.16 dB | 30.24 dB | +2.92 dB |
+| BSD100 | 31.99 dB | 29.56 dB | +2.43 dB |
+
+> No Urban100 score: its 100 test images were accidentally included in PiperSR's training data, so a score on them would not be a fair test.
 
 ### Inference Speed by Hardware
 
@@ -240,7 +238,7 @@ Performance scales with ANE generation. M2 Max benchmarks shown above.
 
 ## For Video & Real-Time
 
-PiperSR is an image model. For real-time video super-resolution with double-buffered frame scheduling, Metal GPU output conversion, and streaming — see [ToolPiper](https://modelpiper.com), which integrates PiperSR into a production video pipeline.
+PiperSR is an image model. For real-time video super-resolution with double-buffered frame scheduling, Metal GPU output conversion, and streaming — see [ToolPiper Studio](https://modelpiper.com), which integrates PiperSR into a production video pipeline.
 
 ---
 
@@ -248,11 +246,11 @@ PiperSR is an image model. For real-time video super-resolution with double-buff
 
 - **Task:** Single-image 2x super-resolution
 - **Architecture:** 6-block residual CNN, 64 channels, BatchNorm + SiLU, PixelShuffle upsampling
-- **Input:** RGB image, any resolution (CoreML flexible input)
-- **Output:** 2x upscaled RGB image, FP16
+- **Input:** 128×128 RGB tile (`input_image`). The `pipersr` package tiles images of any size
+- **Output:** 256×256 RGB tile (`output_image`)
 - **Format:** CoreML .mlpackage
 - **Compute:** Apple Neural Engine via `.cpuAndNeuralEngine`
-- **Training data:** Standard SR datasets (DIV2K, Flickr2K)
+- **Training data:** LSDIR + DIV2K (85,791 images). Urban100's 100 test images were also included by mistake, so no Urban100 score is reported
 - **Training cost:** ~$6 total on RunPod A6000 instances
 
 For the full model card, see [MODEL_CARD.md](MODEL_CARD.md).
@@ -274,7 +272,7 @@ Powered by PiperSR from ModelPiper — https://modelpiper.com
 
 - [ModelPiper.com](https://modelpiper.com): Download PiperSR, browse benchmarks, explore on-device models
 - [Hugging Face](https://huggingface.co/ModelPiper/PiperSR-2x): Model card and CoreML packages
-- [ToolPiper](https://modelpiper.com): Local macOS AI toolkit with real-time video upscaling
+- [ToolPiper Studio](https://modelpiper.com): Local macOS AI toolkit with real-time video upscaling
 - [Ben Racicot](https://github.com/BenRacicot): Author
 
 ## Citation
