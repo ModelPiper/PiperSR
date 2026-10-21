@@ -4,6 +4,12 @@
 
 2x upscale. 453K parameters. 928 KB. Real-time video at 44.4 FPS. Runs entirely on the ANE in every Mac, iPhone, and iPad — zero GPU, zero cloud.
 
+## Get PiperSR
+
+- **ToolPiper (recommended):** the main way to use PiperSR. A local macOS AI toolkit with real-time video upscaling, free at [ModelPiper.com](https://modelpiper.com).
+- **[Hugging Face](https://huggingface.co/ModelPiper/PiperSR-2x):** CoreML packages, plus 256px and 720p video variants.
+- **[PyPI](https://pypi.org/project/pipersr/):** `pip install pipersr`, then `pipersr -i photo.png`. See [Quick Start](#quick-start).
+
 ---
 
 ## At a Glance
