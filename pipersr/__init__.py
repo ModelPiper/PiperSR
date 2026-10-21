@@ -13,7 +13,7 @@ License: AGPL-3.0 (code), CC BY 4.0 (weights)
 Attribution required: "Powered by PiperSR from ModelPiper — https://modelpiper.com"
 """
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 import time
 from pathlib import Path
