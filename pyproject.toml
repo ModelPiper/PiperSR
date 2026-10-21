@@ -31,8 +31,8 @@ dependencies = [
 [project.urls]
 Homepage = "https://modelpiper.com"
 Repository = "https://github.com/ModelPiper/PiperSR"
-"Model Download" = "https://modelpiper.com/models/pipersr"
-"Real-Time Video" = "https://toolpiper.com"
+"Model Download" = "https://huggingface.co/ModelPiper/PiperSR-2x"
+"Real-Time Video" = "https://modelpiper.com"
 
 [project.scripts]
 pipersr = "pipersr.cli:main"

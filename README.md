@@ -119,9 +119,9 @@ Model weights (928 KB) are bundled in the package. No downloads, no API keys, no
 
 ## Download
 
-The CoreML model (`PiperSR_2x.mlpackage`, 928 KB) is included in this repo. Clone and run — no separate download needed.
+The CoreML model (`PiperSR_2x.mlpackage`, 928 KB) is included in this repo. Clone and run. No separate download needed.
 
-Also available on [ModelPiper.com](https://modelpiper.com/models/pipersr).
+Also available on [Hugging Face](https://huggingface.co/ModelPiper/PiperSR-2x), along with 256px and 720p video variants.
 
 ---
 
@@ -266,9 +266,10 @@ Powered by PiperSR from ModelPiper — https://modelpiper.com
 
 ## Links
 
-- [ModelPiper.com](https://modelpiper.com) — Download PiperSR, browse benchmarks, explore on-device models
-- [ToolPiper](https://modelpiper.com) — Local macOS AI toolkit with real-time video upscaling
-- [Ben Racicot](https://github.com/BenRacicot) — Author
+- [ModelPiper.com](https://modelpiper.com): Download PiperSR, browse benchmarks, explore on-device models
+- [Hugging Face](https://huggingface.co/ModelPiper/PiperSR-2x): Model card and CoreML packages
+- [ToolPiper](https://modelpiper.com): Local macOS AI toolkit with real-time video upscaling
+- [Ben Racicot](https://github.com/BenRacicot): Author
 
 ## Citation
 
